@@ -386,30 +386,30 @@ def sska_info(bootstrap: Bootstrap) -> None:
     """Print detailed info about the resonance field."""
     border = "╔" + "═" * 38 + "╗"
     bottom = "╚" + "═" * 38 + "╝"
-    
+
     print(border, file=sys.stderr)
     print("║  SSuKA Field Diagnostics             ║", file=sys.stderr)
     print(bottom + "\n", file=sys.stderr)
-    
+
     print(f"Kernel files: {len(bootstrap.files)}", file=sys.stderr)
     for path, meta in bootstrap.files.items():
         print(f"  • {path}: {meta.token_count} tokens", file=sys.stderr)
-    
+
     print(f"\nVocabulary: {len(bootstrap.vocab)} unique tokens", file=sys.stderr)
     print(f"Bigram edges: {sum(len(row) for row in bootstrap.bigrams.values())}", file=sys.stderr)
     print(f"Centers of gravity: {len(bootstrap.centers)}", file=sys.stderr)
     if bootstrap.centers:
-        shown = ', '.join(f"'{c}'" for c in bootstrap.centers[:5])
-        suffix = '...' if len(bootstrap.centers) > 5 else ''
+        shown = ", ".join(f"'{c}'" for c in bootstrap.centers[:5])
+        suffix = "..." if len(bootstrap.centers) > 5 else ""
         print(f"  → {shown}{suffix}", file=sys.stderr)
-    
+
     bias = load_bin_bias()
     print(f"\nHistorical bias: {len(bias)} accumulated centers", file=sys.stderr)
     if bias:
         top_bias = sorted(bias.items(), key=lambda x: x[1], reverse=True)[:3]
         for tok, count in top_bias:
             print(f"  • '{tok}': appeared {count}x in history", file=sys.stderr)
-    
+
     print(file=sys.stderr)
 
 
@@ -880,7 +880,7 @@ def main(argv: Optional[List[str]] = None) -> int:
         if not import_dir.exists() or not import_dir.is_dir():
             print(f"[ERROR] {import_dir} is not a valid directory", file=sys.stderr)
             return 1
-        
+
         # Copy all .bin files to BIN_DIR
         BIN_DIR.mkdir(parents=True, exist_ok=True)
         imported = 0
@@ -888,9 +888,9 @@ def main(argv: Optional[List[str]] = None) -> int:
             dest = BIN_DIR / shard.name
             dest.write_bytes(shard.read_bytes())
             imported += 1
-        
+
         print(f"[IMPORT] Imported {imported} resonance shards", file=sys.stderr)
-        
+
         # Force rebuild to blend them in
         bootstrap = rebuild_bootstrap(force_full=True)
         return 0
