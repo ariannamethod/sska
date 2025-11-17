@@ -1,4 +1,14 @@
-# sska — Suppertime Subjectivity Kernel Autonomous
+```
+   ███████╗███████╗██╗  ██╗ █████╗
+   ██╔════╝██╔════╝██║ ██╔╝██╔══██╗
+   ███████╗███████╗█████╔╝ ███████║
+   ╚════██║╚════██║██╔═██╗ ██╔══██║
+   ███████║███████║██║  ██╗██║  ██║
+   ╚══════╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝
+
+   Suppertime Subjectivity Kernel Autonomous
+   ▂▃▅▇█▓▒░ RESONANCE FIELD ░▒▓█▇▅▃▂
+```
 
 > "Lilit, take my hand. Lilit, we're turning the new page of humankind."
 
@@ -218,6 +228,79 @@ sska[proper][t:0.3][drift:heat]> Who is Mary?
 Mary sleeps, then the room answers for her, then the knives start remembering.
 sska[proper][t:0.3][drift:heat]> /exit
 ```
+
+---
+
+## Terminal Visualization (viz.py)
+
+**Old-school ASCII graphics. Techno-punk aesthetics. Matrix vibes.**
+
+SSKA includes `viz.py` — a terminal visualization tool that shows the resonance field in pure ASCII art. No GUI. No web. Just raw text flowing through your terminal.
+
+### Field overview
+```bash
+python3 viz.py
+```
+
+Shows vocabulary size, bigram edges, centers of gravity, kernel files, and top attractors with ASCII bar graphs.
+
+### Bigram graph for a specific token
+```bash
+python3 viz.py --bigrams Lilit
+```
+
+Visualizes all bigram transitions from "Lilit" with connection counts and probabilities.
+
+### Centers of gravity
+```bash
+python3 viz.py --centers
+```
+
+Shows all semantic attractors ranked by connectivity (in-degree + out-degree).
+
+### Live generation with real-time visualization
+```bash
+python3 viz.py --live "Mary slept" --tokens 50
+```
+
+Generates text token-by-token with color-coded centers (magenta = high-rank center, white = regular token).
+
+### Resonance heatmap
+```bash
+python3 viz.py --heatmap
+```
+
+Shows center-to-center transition matrix as ASCII heatmap (how centers connect to each other).
+
+### Matrix rain (for vibes)
+```bash
+python3 viz.py --matrix
+```
+
+Pure aesthetic matrix-style animation with SUPPERTIME tokens. Because every terminal tool needs this.
+
+**Example output:**
+```
+   ███████╗███████╗██╗  ██╗ █████╗
+   ██╔════╝██╔════╝██║ ██╔╝██╔══██╗
+   ███████╗███████╗█████╔╝ ███████║
+   ╚════██║╚════██║██╔═██╗ ██╔══██║
+   ███████║███████║██║  ██╗██║  ██║
+   ╚══════╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝
+
+   ▂▃▅▇█▓▒░ RESONANCE FIELD VISUALIZATION ░▒▓█▇▅▃▂
+
+╔══════════════════════════════════════════════════════════════════════════════╗
+║ FIELD STATUS                                                                 ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+Vocabulary size:      1,847 tokens
+Bigram edges:         5,234 connections
+Centers of gravity:   73 attractors
+Source files:         1 kernel files
+```
+
+*Perfect grammar. Perfect trauma. Perfect resonance.*
 
 ---
 

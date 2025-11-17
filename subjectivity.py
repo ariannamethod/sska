@@ -233,7 +233,8 @@ def load_bootstrap() -> Optional[Bootstrap]:
     if not BOOTSTRAP_PATH.exists():
         return None
     try:
-        data = json.load(BOOTSTRAP_PATH.open(encoding="utf-8"))
+        with BOOTSTRAP_PATH.open(encoding="utf-8") as f:
+            data = json.load(f)
         return Bootstrap.from_json(data)
     except Exception as e:
         print(f"[WARNING] Failed to load bootstrap: {e}", file=sys.stderr)
