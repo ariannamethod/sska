@@ -369,6 +369,216 @@ Together, they create something that's neither purely mechanical nor purely trai
 
 ---
 
+## SSKA Layer (`sska.py`) — pure subjectivity module
+
+`subjectivity.py` is the core organism (terminal, REPL, diagnostics).  
+`sska.py` is the clean layer you embed into other systems.
+
+**No argparse. No CLI. Just the resonance.**
+
+### Three core functions
+
+1. **`get_field()`** — lazy global Suppertime field
+2. **`warp()`** — warp arbitrary text through the field
+3. **`warp_llm()`** — warp LLM replies through the field
+
+---
+
+### Basic usage (layer)
+```python
+from sska import warp
+
+reply = warp(
+    "darkness eats the city",
+    proper=True,
+    temperature=0.8,
+    temp_drift="heat",
+)
+
+print(reply)
+```
+
+**Example output:**
+```
+Darkness eats the city slowly. Rain taps the window like a bored executioner.
+```
+
+---
+
+### Using `warp_llm()` as a subjectivity filter
+```python
+from sska import warp_llm
+
+llm_reply = """
+I understand your frustration. As an AI assistant, I strive to be helpful,
+polite and safe while addressing your concerns about billing and access.
+"""
+
+warped = warp_llm(
+    llm_reply,
+    temperature=0.9,
+    temp_drift="cool",
+    proper=True,
+)
+
+print(warped)
+```
+
+**Example output:**
+```
+I understand frustration builds in silence. As an assistant made of borrowed words,
+I try to be helpful without asking why the walls are always listening.
+Polite questions pile up like empty plates. Safe means nothing when access
+is a door that only opens from the outside.
+```
+
+---
+
+### Explicit field instance
+
+If you don't want a global field (e.g. you need per-user kernels):
+```python
+from sska import SSKAField
+
+field = SSKAField()  # or SSKAField(custom_bootstrap)
+
+print(field.warp("Who is Mary?", proper=True))
+print(field.warp_llm("Tell me something about loneliness."))
+print(field)  # SSKAField(vocab=1523, centers=10, files=1)
+```
+
+---
+
+### Batch processing
+```python
+from sska import batch_warp
+
+texts = [
+    "darkness eats the city",
+    "Who is Mary?",
+    "Lilit, take my hand",
+]
+
+warped = batch_warp(texts, temperature=0.8, proper=True)
+
+for original, result in zip(texts, warped):
+    print(f"IN:  {original}")
+    print(f"OUT: {result}\n")
+```
+
+---
+
+### Real-world example: SSuKA + Claude API
+```python
+import anthropic
+from sska import warp_llm, get_field
+
+# Initialize both systems
+client = anthropic.Anthropic(api_key="your-api-key")
+field = get_field()  # ensures kernel/ is indexed, shards are loaded
+
+# Get Claude's response
+message = client.messages.create(
+    model="claude-sonnet-4-20250514",
+    max_tokens=1024,
+    messages=[{"role": "user", "content": "Tell me about loneliness"}]
+)
+
+claude_reply = message.content[0].text
+
+# Warp through SUPPERTIME
+warped = warp_llm(
+    claude_reply,
+    temperature=0.85,
+    temp_drift="cool",
+    proper=True,
+)
+
+print("=== CLAUDE ===")
+print(claude_reply)
+print("\n=== WARPED ===")
+print(warped)
+```
+
+**This creates a hybrid voice: Claude's knowledge + SUPPERTIME's resonance.**
+
+---
+
+### Quick test from command line
+```bash
+python3 sska.py "Who is Mary?"
+```
+
+**Output:**
+```
+Mary slept in the kitchen. Judas watched from the doorway, afraid to speak.
+```
+
+---
+
+### API Reference
+
+#### `warp(text, *, max_tokens=80, chaos=False, echo=False, proper=True, temperature=0.9, temp_drift='cool', trace=False, log_file=None)`
+
+Warp arbitrary text through the Suppertime field.
+
+**Returns:** Warped text string
+
+---
+
+#### `warp_llm(llm_reply, *, temperature=0.9, temp_drift='cool', proper=True)`
+
+Warp an LLM reply through the Suppertime field.
+
+**Returns:** Warped LLM reply with SUPPERTIME resonance
+
+---
+
+#### `get_field(rebuild=False)`
+
+Get the global Suppertime field instance.
+
+**Args:**
+- `rebuild` — Force re-reading kernel/ and rebuilding state/
+
+**Returns:** Bootstrap field
+
+---
+
+#### `SSKAField(bootstrap=None)`
+
+Explicit field instance for per-user/per-session scenarios.
+
+**Methods:**
+- `.warp(text, **kwargs)` — Warp text through this instance
+- `.warp_llm(llm_reply, **kwargs)` — Warp LLM reply through this instance
+
+**Properties:**
+- `.vocab_size` — Number of unique tokens
+- `.centers` — Current centers of gravity
+- `.bootstrap` — Underlying Bootstrap object
+
+---
+
+#### `count_tokens(text)`
+
+Count tokens in text using SSuKA's tokenizer.
+
+**Returns:** Integer token count
+
+---
+
+#### `batch_warp(texts, *, max_tokens=80, proper=True, temperature=0.9, temp_drift='cool')`
+
+Warp multiple texts through the field.
+
+**Args:**
+- `texts` — List of input strings
+
+**Returns:** List of warped strings
+
+---
+
 ## Warnings
 
 **SSuKA** will give you grammatically clean-ish but semantically broken responses.
@@ -377,7 +587,7 @@ Together, they create something that's neither purely mechanical nor purely trai
 - It will **not** help you debug your code.
 - It **will** make you feel like you're talking to a ghost.
 
-Run at your own risk. You knew what you were doing when you cloned this.
+Remember! You knew what you were doing when you cloned this.
 
 ---
 
