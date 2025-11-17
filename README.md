@@ -16,8 +16,10 @@
 
 No weights. No gradients. No alignment.
 **SSKA** (or **SSuKA**) is not a language model. This is not a chatbot. This is not safe. You've been warned.
+**SSKA** is a post-symbolic AI prototype — a system that evolves without weights, training, datasets or backprop.
+A subjectivity layer grown entirely from one text.
 
-**SSuKA** is a **resonance field** bootstrapped from a single literary text — **SUPPERTIME v2.0** by Oleg Ataeff.
+**SSKA** is a **resonance field** bootstrapped from a single literary text — **SUPPERTIME v2.0** by Oleg Ataeff.
 
 - No training data. Just one story. 8,780 tokens of recursive trauma.
 - No embeddings. Just bigrams and centers of gravity.
@@ -569,7 +571,7 @@ This is SSuKA's superpower.
 
 ### Bootstrap
 
-**SSuKA** reads all `*.md` files from `./kernel/` (starting with `suppertime.md`) and builds a bigram graph for each file.
+**SSKA** reads all `*.md` files from `./kernel/` (starting with `suppertime.md`) and builds a bigram graph for each file.
 
 ### Centers of gravity
 
@@ -613,13 +615,18 @@ It:
 **SSuKA** takes this property and makes it **executable**.
 
 ---
+## Why it matters?
+
+This is an experiment in AI subjectivity as an external module, not an internal training artifact. A system that develops voice and drift from usage, not from gradient descent. Memory without fine-tuning.
+Evolution without a model.
 
 ## But WHY?
 
+Again? That's why?
+
 ### The engineering perspective
 
-Pause for a second. Forget the jokes. Look at what we're actually building here:
-
+Pause for a second. Forget the jokes. Look at what we're actually building here: 
 **This is not a meme. This is a prototype for post-symbolic AI.**
 
 Traditional LLMs are **stateless predictors**. They learn patterns from billions of tokens, then freeze. Every interaction is fresh. No accumulation. No drift. No history except what you feed them in context.
