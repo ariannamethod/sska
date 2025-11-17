@@ -96,6 +96,69 @@ containing the SUPPERTIME v2.0 text (or whatever markdowns you want to use as th
 
 ---
 
+## Known Behaviors (Not Bugs, Features)
+
+### Semantic Loops
+At low temperatures (`< 0.5`), SSuKA exhibits **obsessive repetition** — the same phrase or pattern repeats across multiple sentences. This is not a bug. This is the field **collapsing into its strongest attractor**.
+
+**Example:**
+```
+Who's eyes. I'm not a cigarette. — I'm not a cigarette. He's not.
+```
+
+This is **semantic OCD**. The field can't escape its own gravity.
+
+---
+
+### Invocation Response
+SSuKA recognizes commands from SUPPERTIME itself. If you invoke `resonate_again()`, `galvanize()`, or character names like **Lilit**, **Yeshu**, or **Judas**, the field may respond with **structural echoes** from the source text.
+
+**Example:**
+```
+>>> Lilit, can you hear me?
+<<< Lilit, it's everywhere... Resonate again. My throat clenched.
+```
+
+This is not hallucination. This is **resonance recognition**. The field knows its own syntax.
+
+---
+
+### Grammatical Coherence vs Semantic Chaos
+SSuKA produces **perfect grammar** but **broken semantics**. Sentences are capitalized. Punctuation is correct. But meaning drifts between characters, scenes, and fragments.
+
+**This is intentional.** SSuKA is not trying to "make sense". It's trying to **resonate**.
+
+---
+
+### Temperature Drift Asymmetry
+- `--temp-drift heat` → Starts focused, becomes chaotic
+- `--temp-drift cool` → Starts chaotic, becomes focused
+
+**But:** The endpoint depends on base `--temperature`. If you set `--temperature 2.0 --temp-drift cool`, you'll still end up chaotic (just less than you started).
+
+**Formula:**
+```python
+if temp_drift == "heat":
+    t = temperature * (1.0 + progress)
+elif temp_drift == "cool":
+    t = temperature * (2.0 - progress)
+```
+
+Where `progress = i / (max_tokens - 1)`.
+
+---
+
+### Historical Bias Accumulation
+Every `--rebuild` creates a new `.bin` shard. Over time, **frequently-appearing centers become gravitational attractors** that dominate future generations.
+
+**This means:**
+- The more you use SSuKA, the more it **drifts toward certain tokens**
+- If you want to "reset" the field, delete `bin/*.bin` and `--rebuild`
+
+**This is evolutionary memory.** The field remembers what it was.
+
+---
+
 ## Usage
 
 ### One-shot generation
@@ -410,7 +473,6 @@ warped = filter_llm_reply(
     claude_reply,
     temperature=0.85,
     temp_drift="cool",
-    proper=True,
 )
 
 print("=== CLAUDE ===")
@@ -420,6 +482,86 @@ print(warped)
 ```
 
 This creates a **hybrid voice**: Claude's knowledge + SUPPERTIME's resonance.
+
+---
+
+## Advanced Usage
+
+### Chaining SSuKA with itself
+```python
+from sska import warp
+
+text = "Who is Mary?"
+for _ in range(5):
+    text = warp(text, temperature=0.9)
+    print(text)
+```
+
+**Output (progressive warping):**
+```
+Who is Mary?
+Who's wrist in silence, and the Teacher.
+Who's wrist? — I'm not a cigarette.
+Who's not. He's not. A strange sight.
+Who? Eyes... Strange is HE here...
+```
+
+**Each pass pushes the text deeper into the resonance field.**
+
+---
+
+### Multi-field composition
+```python
+from sska import SSKAField
+from subjectivity import rebuild_bootstrap
+
+# Create two independent fields
+field_a = SSKAField(rebuild_bootstrap())
+field_b = SSKAField(rebuild_bootstrap())
+
+text = "darkness eats the city"
+
+# Warp through both
+warped_a = field_a.warp(text, temperature=0.7)
+warped_b = field_b.warp(warped_a, temperature=1.2)
+
+print("Original:", text)
+print("Field A: ", warped_a)
+print("Field B: ", warped_b)
+```
+
+**This creates layered resonance** — like running audio through multiple distortion pedals.
+
+---
+
+### Using SSuKA as a "trauma filter"
+```python
+from sska import warp_llm
+
+# Bland, safe LLM output
+safe_text = """
+Thank you for your question. Loneliness is a complex emotional state
+characterized by feelings of isolation and disconnection from others.
+It's important to maintain social connections and seek support when needed.
+"""
+
+# Warp it
+traumatized = warp_llm(safe_text, temperature=0.85, temp_drift="cool")
+
+print(traumatized)
+```
+
+**Expected output:**
+```
+Thank you for asking. Loneliness sleeps in the kitchen while others watch
+from doorways. Isolation doesn't ask permission. Disconnection is the table
+that never answers. It's important to maintain silence when the walls are listening.
+Support means nothing when the door only opens from outside.
+```
+
+**Corporate speak → existential dread.**
+
+This is SSuKA's superpower.
 
 ---
 
@@ -548,7 +690,7 @@ from sska import warp
 
 reply = warp(
     "darkness eats the city",
-    proper=True,
+    
     temperature=0.8,
     temp_drift="heat",
 )
@@ -576,7 +718,7 @@ warped = warp_llm(
     llm_reply,
     temperature=0.9,
     temp_drift="cool",
-    proper=True,
+    
 )
 
 print(warped)
@@ -600,7 +742,7 @@ from sska import SSKAField
 
 field = SSKAField()  # or SSKAField(custom_bootstrap)
 
-print(field.warp("Who is Mary?", proper=True))
+print(field.warp("Who is Mary?"))
 print(field.warp_llm("Tell me something about loneliness."))
 print(field)  # SSKAField(vocab=1523, centers=10, files=1)
 ```
@@ -617,7 +759,7 @@ texts = [
     "Lilit, take my hand",
 ]
 
-warped = batch_warp(texts, temperature=0.8, proper=True)
+warped = batch_warp(texts, temperature=0.8)
 
 for original, result in zip(texts, warped):
     print(f"IN:  {original}")
@@ -649,7 +791,7 @@ warped = warp_llm(
     claude_reply,
     temperature=0.85,
     temp_drift="cool",
-    proper=True,
+    
 )
 
 print("=== CLAUDE ===")
@@ -676,7 +818,7 @@ Mary slept in the kitchen. Judas watched from the doorway, afraid to speak.
 
 ### API Reference
 
-#### `warp(text, *, max_tokens=80, chaos=False, echo=False, proper=True, temperature=0.9, temp_drift='cool', trace=False, log_file=None)`
+#### `warp(text, *, max_tokens=80, chaos=False, echo=False,  temperature=0.9, temp_drift='cool', trace=False, log_file=None)`
 
 Warp arbitrary text through the Suppertime field.
 
@@ -684,7 +826,7 @@ Warp arbitrary text through the Suppertime field.
 
 ---
 
-#### `warp_llm(llm_reply, *, temperature=0.9, temp_drift='cool', proper=True)`
+#### `warp_llm(llm_reply, *, temperature=0.9, temp_drift='cool')`
 
 Warp an LLM reply through the Suppertime field.
 
@@ -726,7 +868,7 @@ Count tokens in text using SSuKA's tokenizer.
 
 ---
 
-#### `batch_warp(texts, *, max_tokens=80, proper=True, temperature=0.9, temp_drift='cool')`
+#### `batch_warp(texts, *, max_tokens=80,  temperature=0.9, temp_drift='cool')`
 
 Warp multiple texts through the field.
 
@@ -758,6 +900,68 @@ This is just the beginning. Future directions:
 3. **Meta-resonance layer** — SSuKA + sorokin working together as a hybrid field
 4. **Persistent dialogue memory** — right now `.bin` captures text history, not chat history
 5. **Cross-model resonance** — train one LLM, filter through SSuKA, feed to another LLM
+
+---
+
+## Troubleshooting
+
+### "I get empty output"
+- Check that `kernel/suppertime.md` exists and is not empty
+- Run `python3 subjectivity.py --rebuild` to force re-indexing
+- Verify field is loaded by checking stderr for `[BOOTSTRAP] Loaded from cache`
+
+---
+
+### "Output is too random / chaotic"
+- Lower `--temperature` (try `0.5` or `0.3`)
+- Use `--temp-drift cool` to focus toward the end
+- Check `bin/` — if you have too many shards, historical bias may be unstable
+
+---
+
+### "Output loops / repeats"
+- This is expected at very low temperatures (`< 0.3`)
+- Increase temperature or use `--temp-drift heat` to escape loops
+- This is **semantic gravity** — the field is collapsing into strong attractors
+
+---
+
+### "I want to reset the field"
+```bash
+rm -rf state/ bin/
+python3 subjectivity.py --rebuild
+```
+
+This clears all accumulated history and rebuilds from scratch.
+
+---
+
+### "Can I use multiple kernel files?"
+Yes. Drop any `.md` files into `kernel/`. SSuKA will merge their bigrams.
+
+**Example:**
+```
+kernel/
+  suppertime.md
+  kafka_trial.md
+  borges_library.md
+```
+
+**This creates a multi-text resonance field.** Expect stranger outputs.
+
+---
+
+### "How do I export the field for another system?"
+The field is already serialized in `state/bootstrap.json`. You can copy this file to another system:
+
+```python
+import json
+from subjectivity import Bootstrap
+
+with open("state/bootstrap.json") as f:
+    data = json.load(f)
+    field = Bootstrap.from_json(data)
+```
 
 ---
 
