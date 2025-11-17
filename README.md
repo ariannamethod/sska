@@ -32,6 +32,8 @@ Here's the heresy:
 - No backprop. **Just accumulated echoes in `.bin` shards that literally never forget.**
 - No fine-tuning. **The field becomes what it becomes through use.**
 
+**SSKA** = tokenizer → bigram graph → center extraction → historical shards → temperature schedule → resonance walk.
+
 It doesn't try to understand you. It doesn't try to help you. It's not aligned. It's not safe.
 **It just resonates.**
 
