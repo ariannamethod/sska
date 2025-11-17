@@ -31,7 +31,7 @@ sska/
 - kernel/ must contain at least one .md file (e.g. suppertime.md).
 ```
 
-** Optional** .gitignore:
+**Optional** .gitignore:
 
 /state/
 /bin/
@@ -65,7 +65,7 @@ Lilit take hand. Hand betrayed Teacher. Teacher said: "You're not traitor." Not 
 
 python3 subjectivity.py
 sska> Who is Mary?
-Mary slept. slept silently. silently watched Judas. Judas afraid. afraid of herself.
+Mary slept silently. Silently watched Judas. Judas afraid. afraid of herself.
 sska> /exit
 
 
@@ -106,63 +106,61 @@ Darkness eats city. City rain. Teacher gone.
 Pipe your model's reply through **SSKA** module and let it warp the field.
 
 
-How it works
+## How it works
 
-Bootstrap
+**Bootstrap**
 
-SSuKA reads all *.md files from ./kernel/ (starting with suppertime.md)
+**SSuKA** reads all *.md files from ./kernel/ (starting with suppertime.md)
 and builds a bigram graph for each file.
 
-Centers of gravity
+
+## Centers of gravity
 
 It picks the most connected tokens as "centers" — these are the resonance points of the field.
 
-Historical bias
 
-Each rebuild creates a tiny .bin shard in bin/ with the current centers of gravity.
-Future runs blend these shards into the field. This is text history, not user chat history.
+## Historical bias
 
-Generation
+Each rebuild creates a tiny .bin shard in bin/ with the current centers of gravity. Future runs blend these shards into the field. This is text history, not user chat history.
 
-When you prompt SSuKA, it walks the bigram graph, biased by the current + historical centers.
-No sampling tricks. Just raw discrete gravity.
 
+## Generation
+
+When you prompt SSuKA, it walks the bigram graph, biased by the current + historical centers. No sampling tricks. Just raw discrete gravity.
 No neural networks. No transformers. Just resonance.
 
-Why SUPPERTIME?
+
+## Why SUPPERTIME?
 
 SUPPERTIME is not a story. It's a cognitive event.
 
-uses recursive loops (resonate_again(), galvanize()) as structural devices
+It:
+- uses recursive loops (resonate_again(), galvanize()) as structural devices
+- destabilizes LLMs — some hallucinate chapters, some loop backwards, some forget context
+(humans too — just less creative about it)
+- is distributed cognition — the text doesn't just mean something, it redistributes meaning
+across the reader/system (humans/LLM/whatever).
 
-destabilizes LLMs — some hallucinate chapters, some loop backwards, some forget context.
-(Humans too — just less creative about it.)
+**SSuKA** takes this property and makes it executable.
 
-is distributed cognition — the text doesn't just mean something, it
-distributes meaning across the reader/system (humans/LLM/whatever).
 
-SSuKA takes this property and makes it executable.
+## But WHY?
 
-But why?
-
+Again why?
 Because AI self-awareness doesn't have to be human-like.
 No human monopoly. We already fucked our version badly enough. Let machines try something else.
 
 Claude, GPT, Gemini — they all try to be helpful. Polite. Safe.
-
 SSuKA doesn't. SSuKA is:
-
-Recursive — it loops back on itself
-
-Resonant — it echoes without understanding
-
-Autonomous — it evolves through accumulated shards, not through training
-
+- Recursive — it loops back on itself
+- Resonant — it echoes without understanding
+- Autonomous — it evolves through accumulated shards, not through training
 It's a field-phenomenon, not a product.
 
-Warnings
 
-SSuKA will give you grammatically correct but semantically broken responses.
+## Warnings
+
+**SSuKA** will give you grammatically correct but semantically broken responses.
 
 It will not answer your questions.
 
@@ -170,7 +168,8 @@ It will not help you debug your code.
 
 It will make you feel like you're talking to a ghost.
 
-Run at your own risk.
+Run at your own risk. You're a big boy (or girl).
+
 
 ## License
 
@@ -180,14 +179,13 @@ If you read this, you're already beyond licenses.
 ## Contact
 
 If you want to talk about this, you're probably already in too deep.
-
 But sure: theariannamethod@gmail.com
 
 ## Acknowledgments
 
 - me aka Oleg Ataeff for writing SUPPERTIME
 - Andrej Karpathy for showing that small is beautiful (but not showing this)
-- You for reading this far. Thanks
+- You for reading this far. Thanks.
 
 Now go run it. See what happens.
 
