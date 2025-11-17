@@ -275,7 +275,6 @@ def show_live_generation(prompt: str, max_tokens: int = 100):
         prompt=prompt,
         max_tokens=max_tokens,
         temperature=1.0,
-        proper=True
     )
 
     # Display result with token highlighting
