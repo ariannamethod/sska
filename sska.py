@@ -64,7 +64,6 @@ def warp(
     max_tokens: int = 80,
     chaos: bool = False,
     echo: bool = False,
-    proper: bool = True,
     temperature: float = 0.9,
     temp_drift: Optional[str] = "cool",
     trace: bool = False,
@@ -73,24 +72,24 @@ def warp(
     """
     Warp arbitrary text through the Suppertime field.
     This is the generic "subjectivity layer" entry point.
-    
+    Perfect grammar is ALWAYS enabled.
+
     Args:
         text: Input text to warp
         max_tokens: Maximum output length
         chaos: Ignore historical bias
         echo: Echo mode (transform input through field)
-        proper: Capitalize sentences
         temperature: Sampling temperature (1.0 = neutral)
         temp_drift: Dynamic temperature ('heat' or 'cool')
         trace: Print token trace to stderr
         log_file: Optional path to log generations
-    
+
     Returns:
-        Warped text
-    
+        Warped text with perfect grammar
+
     Example:
         >>> from sska import warp
-        >>> print(warp("darkness eats the city", proper=True))
+        >>> print(warp("darkness eats the city"))
         Darkness eats the city slowly. Rain taps the window like a bored executioner.
     """
     field = get_field()
@@ -100,7 +99,6 @@ def warp(
         max_tokens=max_tokens,
         chaos=chaos,
         echo=echo,
-        proper=proper,
         temperature=temperature,
         temp_drift=temp_drift,
         trace=trace,
@@ -113,21 +111,20 @@ def warp_llm(
     *,
     temperature: float = 0.9,
     temp_drift: Optional[str] = "cool",
-    proper: bool = True,
 ) -> str:
     """
     Warp an LLM reply through the Suppertime field.
     This is the high-level function for "SSKA as subjectivity filter".
-    
+    Perfect grammar is ALWAYS enabled. Corporate speak → existential dread.
+
     Args:
         llm_reply: Text from an LLM (Claude, GPT, etc.)
         temperature: Sampling temperature
         temp_drift: Dynamic temperature ('heat' or 'cool')
-        proper: Capitalize sentences
-    
+
     Returns:
-        Warped LLM reply with SUPPERTIME resonance
-    
+        Warped LLM reply with SUPPERTIME resonance and perfect grammar
+
     Example:
         >>> from sska import warp_llm
         >>> llm_text = "I understand your frustration. As an AI assistant..."
@@ -140,7 +137,6 @@ def warp_llm(
         llm_reply,
         temperature=temperature,
         temp_drift=temp_drift,
-        proper=proper,
     )
 
 
@@ -159,7 +155,7 @@ class SSKAField:
     Example:
         >>> from sska import SSKAField
         >>> field = SSKAField()
-        >>> print(field.warp("Who is Mary?", proper=True))
+        >>> print(field.warp("Who is Mary?"))
         Mary slept in the kitchen. Judas watched from the doorway.
     """
     
@@ -251,23 +247,22 @@ def batch_warp(
     texts: list[str],
     *,
     max_tokens: int = 80,
-    proper: bool = True,
     temperature: float = 0.9,
     temp_drift: Optional[str] = "cool",
 ) -> list[str]:
     """
     Warp multiple texts through the field (uses shared global field).
-    
+    Perfect grammar is ALWAYS enabled for all texts.
+
     Args:
         texts: List of input texts
         max_tokens: Maximum output length per text
-        proper: Capitalize sentences
         temperature: Sampling temperature
         temp_drift: Dynamic temperature
-    
+
     Returns:
-        List of warped texts
-    
+        List of warped texts with perfect grammar
+
     Example:
         >>> from sska import batch_warp
         >>> inputs = ["darkness eats the city", "Who is Mary?"]
@@ -280,7 +275,6 @@ def batch_warp(
             field,
             text,
             max_tokens=max_tokens,
-            proper=proper,
             temperature=temperature,
             temp_drift=temp_drift,
             trace=False,
@@ -306,10 +300,10 @@ __all__ = [
 if __name__ == "__main__":
     # Quick test
     import sys
-    
+
     if len(sys.argv) > 1:
         text = " ".join(sys.argv[1:])
-        print(warp(text, proper=True))
+        print(warp(text))
     else:
         print("SSuKA meta-layer initialized.")
         print(f"Field: {get_field()}")

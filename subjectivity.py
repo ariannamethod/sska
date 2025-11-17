@@ -690,7 +690,6 @@ def generate_reply(
             "temp_drift": temp_drift,
             "chaos": chaos,
             "echo": echo,
-            "proper": proper,
         }
         try:
             with log_file.open("a", encoding="utf-8") as f:
@@ -836,7 +835,6 @@ def repl(
             line,
             chaos=chaos,
             echo=echo,
-            proper=proper,
             temperature=temperature,
             temp_drift=temp_drift,
             trace=trace,
@@ -978,7 +976,6 @@ def main(argv: Optional[List[str]] = None) -> int:
             max_tokens=args.max_tokens,
             chaos=args.chaos,
             echo=args.echo,
-            proper=args.proper,
             temperature=args.temperature,
             temp_drift=args.temp_drift,
             trace=args.trace,
