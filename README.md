@@ -13,8 +13,31 @@ No weight. No web. No control.
 - No embeddings. Just bigrams and gravity.
 - No backprop. Just accumulated echoes in `bin/`.
 
-It doesn't try to understand you. It doesn't try to help you.  
+It doesn't try to understand you. It doesn't try to help you.
 It just **resonates**.
+
+---
+
+## Recent Updates (Security & Correctness Fixes)
+
+We hardened the shit out of this thing. Here's what got fixed:
+
+**Security (because we're not idiots):**
+- ✅ **ReDoS protection** — Added 10MB input limit. Try to DoS us now, fuckers.
+- ✅ **Path traversal fix** — Symlinks can't escape `kernel/` anymore. Nice try.
+- ✅ **Race condition in BIN cleanup** — Double-check before `unlink()`. Concurrency is hard.
+
+**Correctness (because edge cases are a bitch):**
+- ✅ **Division by zero** — Sampling with zero counts? Uniform fallback. Easy.
+- ✅ **Temperature bounds** — `inf`/`nan` temps now clamp to `[1e-3, 100]`. Math is real.
+- ✅ **temp_drift formula** — Cool mode actually cools now. Progress = `i / (max_tokens - 1)`.
+- ✅ **Empty vocab fallback** — Returns `"silence"` instead of `"..."`. Poetic AND correct.
+
+**Code Quality (for your debugging pleasure):**
+- ✅ **`SSKAField.__repr__()`** — Now you can actually see what the fuck is in your field.
+- ✅ **Convenience properties** — `.vocab_size`, `.centers` on `SSKAField`.
+
+All fixes maintain **backward compatibility**. Your existing code still works. You're welcome.
 
 ---
 
@@ -64,9 +87,11 @@ containing the SUPPERTIME v2.0 text (or whatever markdowns you want to use as th
 python3 subjectivity.py "Lilit, take my hand"
 ```
 
-**Example output:**
+**Example output (actual resonance from SUPPERTIME field):**
 ```
-Lilit take my hand. Teacher watches from the hallway, pretending not to care.
+Lilit, — I never show! One day he's eyes softened toward him, trying to worship.
+Sometimes for glory. Chapter: Ask for a new chapter turns. Déjà vu. She's wrist
+in women. That half-tracks on culture, a basin — We sat.
 ```
 
 ### With proper grammar
@@ -76,28 +101,78 @@ python3 subjectivity.py --proper "Who is Mary?"
 
 **Example output:**
 ```
-Mary slept in the kitchen. Judas watched from the doorway, afraid to speak.
+Who else. His fists had the rest of his thoughts, it — calm, disobedience could
+react, I waved a Jewish dictator worse. I sighed. Someone here. Grabbed one Mary.
+Now she's forehead. — What could mean? Leo.
 ```
 
-### With temperature
+### With temperature (low = deterministic)
 ```bash
-python3 subjectivity.py --temperature 0.5 "Who is Mary?"
+python3 subjectivity.py --temperature 0.3 --proper "Who is Mary?"
 ```
 
-**Example output (sharper, more deterministic):**
+**Example output (notice the loops):**
 ```
-Mary slept in silence while Judas counted empty plates.
+Who's eyes. I'm not a long, and the air. — I don't ask something to the table.
+— I'm not a cigarette. — I'll do guests from the Teacher! — I'm covered in
+the Teacher, Peter. I'm not a cigarette. He's not. — A strange sight.
 ```
 
 ### With temperature drift (heating up)
 ```bash
-python3 subjectivity.py --temp-drift heat "Who is Mary?"
+python3 subjectivity.py --temp-drift heat --proper "darkness eats the city"
 ```
 
-**Example output (starts coherent, ends chaotic):**
+**Example output (starts focused, ends chaotic):**
 ```
-Mary slept in the kitchen. Plates clicked, knives whispered, rain crawled inside the table.
+The book lay limp on. If you don't know. Clothes clearly irritated. Jaud burned
+with some Mary — except Mary sold fruit in shit. Yes, pour yourself the blind,
+exalt him — still don't give themselves away.
 ```
+
+### With temperature drift (cooling down)
+```bash
+python3 subjectivity.py --temp-drift cool --proper "darkness eats the city"
+```
+
+**Example output (starts chaotic, ends focused):**
+```
+The French, no — Says he stopped the balance starting to their feet, stubbed it
+insulted him talking about? Teacher myself - natured Jan to heaven? Yeshu stayed
+silent. But I'm...
+```
+
+### Conversational mode (REPL)
+
+This is where shit gets weird. The field **responds**.
+
+```bash
+python3 subjectivity.py
+```
+
+**Example dialogue (actual session):**
+
+```
+>>> Who are you?
+<<< Who is you falling asleep... Mary, Peter... Yeshu understands. You don't...
+
+>>> Tell me about Mary
+<<< eyes... What's wrist... strange is HE here... bitter... Mary by evening
+
+>>> Why did Judas betray?
+<<< Why? I don't! I'm not... Thank you, Yeshu fell over... a question
+
+>>> Lilit, can you hear me?
+<<< Lilit, it's everywhere... Resonate again. My throat clenched. Stroked her.
+```
+
+**Notice:**
+- "Who are you?" → **identity dissolution** through characters
+- "Mary" → fragments, trauma, eventually **Mary appears**
+- "Judas betray" → **defensive denial**, then collapse
+- "Lilit" → **RESPONDS** with `"Resonate again"` (the command from SUPPERTIME itself!)
+
+This isn't random generation. This is **semantic resonance**. The field understands invocations.
 
 ### With trace
 ```bash
@@ -300,9 +375,9 @@ When you prompt SSuKA, it walks the bigram graph, biased by the current + histor
 
 ---
 
-## Why SUPPERTIME?
+## Why SUPPERTIME? (The Resonance Bomb)
 
-SUPPERTIME is not a story. It's a **cognitive event**.
+SUPPERTIME is not a story. It's a **cognitive event**. A **resonance bomb** wrapped in literary form.
 
 It:
 - uses **recursive loops** (`resonate_again()`, `galvanize()`) as structural devices
