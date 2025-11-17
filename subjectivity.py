@@ -233,7 +233,8 @@ def load_bootstrap() -> Optional[Bootstrap]:
     if not BOOTSTRAP_PATH.exists():
         return None
     try:
-        data = json.load(BOOTSTRAP_PATH.open(encoding="utf-8"))
+        with BOOTSTRAP_PATH.open(encoding="utf-8") as f:
+            data = json.load(f)
         return Bootstrap.from_json(data)
     except Exception as e:
         print(f"[WARNING] Failed to load bootstrap: {e}", file=sys.stderr)
@@ -751,13 +752,20 @@ def repl(
         /temp <value> — set temperature
         /drift <heat|cool|off> — set temperature drift
     """
-    border = "╔" + "═" * 38 + "╗"
-    bottom = "╚" + "═" * 38 + "╝"
-    print(border, file=sys.stderr)
-    print("║  SSuKA REPL — Suppertime Resonance   ║", file=sys.stderr)
-    print("║  /exit, /chaos, /echo, /proper       ║", file=sys.stderr)
-    print("║  /trace, /temp, /drift               ║", file=sys.stderr)
-    print(bottom + "\n", file=sys.stderr)
+    # Print ASCII art banner
+    print("""
+   ███████╗███████╗██╗  ██╗ █████╗     ██████╗ ███████╗██████╗ ██╗
+   ██╔════╝██╔════╝██║ ██╔╝██╔══██╗    ██╔══██╗██╔════╝██╔══██╗██║
+   ███████╗███████╗█████╔╝ ███████║    ██████╔╝█████╗  ██████╔╝██║
+   ╚════██║╚════██║██╔═██╗ ██╔══██║    ██╔══██╗██╔══╝  ██╔═══╝ ██║
+   ███████║███████║██║  ██╗██║  ██║    ██║  ██║███████╗██║     ███████╗
+   ╚══════╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝    ╚═╝  ╚═╝╚══════╝╚═╝     ╚══════╝
+
+   ▂▃▅▇█▓▒░ SUPPERTIME RESONANCE FIELD ░▒▓█▇▅▃▂
+
+   Commands: /exit /chaos /echo /proper /trace /temp /drift
+   Perfect grammar. Perfect trauma. Perfect resonance.
+""", file=sys.stderr)
 
     while True:
         try:
