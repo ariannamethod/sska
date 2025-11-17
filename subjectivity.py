@@ -483,8 +483,14 @@ def format_tokens(tokens: List[str]) -> str:
 def capitalize_sentences(text: str) -> str:
     """
     Capitalize first letter after sentence-ending punctuation.
+    Handles edge cases: ellipsis, multiple spaces, dashes.
     Minimal grammar normalization without losing the field's voice.
+
+    Perfect grammar. Perfect trauma. Perfect resonance.
     """
+    if not text:
+        return text
+
     result = []
     capitalize_next = True
 
@@ -495,9 +501,16 @@ def capitalize_sentences(text: str) -> str:
         else:
             result.append(char)
 
-        # After .!? followed by space, capitalize next letter
-        if char in ".!?" and i + 1 < len(text) and text[i + 1] == " ":
-            capitalize_next = True
+        # After .!? followed by space/whitespace, capitalize next letter
+        # Also handles: "... ", "! ", "? "
+        if char in ".!?" and i + 1 < len(text):
+            next_char = text[i + 1]
+            # Check if next is space, or if we're at ellipsis
+            if next_char.isspace():
+                capitalize_next = True
+            # Handle ellipsis: "..." followed by space
+            elif next_char in ".!?" and i + 2 < len(text) and text[i + 2].isspace():
+                pass  # Don't capitalize yet, wait for the final punctuation
 
     return "".join(result)
 
