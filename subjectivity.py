@@ -34,10 +34,20 @@ BOOTSTRAP_PATH = STATE_DIR / "bootstrap.json"
 # ============================================================================
 
 TOKEN_RE = re.compile(r"[A-Za-zÀ-ÖØ-öø-ÿ']+|[.,!?;:—\-]")
+MAX_INPUT_LENGTH = 10_000_000  # 10MB of text should be enough for anyone
 
 
 def tokenize(text: str) -> List[str]:
-    """Extract words and basic punctuation."""
+    """
+    Extract words and basic punctuation.
+
+    Raises ValueError if input exceeds MAX_INPUT_LENGTH to prevent ReDoS attacks.
+    """
+    if len(text) > MAX_INPUT_LENGTH:
+        raise ValueError(
+            f"Input text too large: {len(text)} chars > {MAX_INPUT_LENGTH} limit. "
+            "This protects against ReDoS attacks."
+        )
     return TOKEN_RE.findall(text)
 
 
@@ -137,6 +147,18 @@ def read_kernel_files() -> Dict[str, Tuple[FileMeta, str]]:
     has_md = False
     for path in sorted(KERNEL_DIR.glob("*.md")):
         has_md = True
+
+        # Security: resolve symlinks and verify the file is still within ROOT
+        real_path = path.resolve()
+        try:
+            real_path.relative_to(ROOT.resolve())
+        except ValueError:
+            print(
+                f"[WARNING] Skipping {path}: resolves outside repository root (possible path traversal)",
+                file=sys.stderr,
+            )
+            continue
+
         text = path.read_text(encoding="utf-8", errors="ignore")
         rel = path.relative_to(ROOT).as_posix()
         digest = sha256_bytes(text.encode("utf-8", errors="ignore"))
@@ -255,7 +277,9 @@ def create_bin_shard(bootstrap: Bootstrap, max_shards: int = 16) -> None:
     while len(shards) > max_shards:
         victim = shards.pop(0)
         try:
-            victim.unlink()
+            # Double-check existence to avoid race conditions
+            if victim.exists():
+                victim.unlink()
         except OSError:
             pass
 
@@ -479,19 +503,29 @@ def capitalize_sentences(text: str) -> str:
 
 
 def choose_start_token(bootstrap: Bootstrap, chaos: bool = False) -> str:
-    """Pick a starting token."""
+    """
+    Pick a starting token.
+
+    If vocab is empty, returns "silence" as a sentinel token.
+    """
     if chaos:
         pool = bootstrap.vocab
     else:
         pool = bootstrap.centers or bootstrap.vocab
     if not pool:
-        return "..."
+        return "silence"  # Proper token instead of punctuation
     return random.choice(pool)
 
 
 def _safe_temperature(t: float) -> float:
-    """Clamp temperature to avoid degenerate values."""
-    return max(t, 1e-3)
+    """
+    Clamp temperature to avoid degenerate values.
+
+    Returns a value in [1e-3, 100.0], or 1.0 if input is not finite.
+    """
+    if not math.isfinite(t):
+        return 1.0  # Default for inf/nan
+    return max(min(t, 100.0), 1e-3)
 
 
 def step_token(
@@ -521,6 +555,11 @@ def step_token(
         counts = [math.pow(c, 1.0 / t) for c in counts]
 
     total = sum(counts)
+    if total == 0:
+        # Fallback to uniform distribution if all counts are zero
+        # (can happen with very low temperature and floating-point underflow)
+        return random.choice(tokens)
+
     r = random.uniform(0, total)
     acc = 0.0
     for tok, c in zip(tokens, counts):
@@ -601,11 +640,13 @@ def generate_reply(
     for i in range(max_tokens - 1):
         # Dynamic temperature
         if temp_drift == "heat":
-            # Start cold, end hot
-            t = temperature * (1.0 + i / max_tokens)
+            # Start cold (temp), end hot (2*temp)
+            progress = i / max(max_tokens - 1, 1)
+            t = temperature * (1.0 + progress)
         elif temp_drift == "cool":
-            # Start hot, end cold
-            t = temperature * (2.0 - i / max_tokens)
+            # Start hot (2*temp), end cold (temp)
+            progress = i / max(max_tokens - 1, 1)
+            t = temperature * (2.0 - progress)
         else:
             t = temperature
 

@@ -142,3 +142,21 @@ class SSKAField:
             temp_drift=temp_drift,
             proper=proper,
         )
+
+    def __repr__(self) -> str:
+        return (
+            f"SSKAField("
+            f"vocab={len(self.bootstrap.vocab)}, "
+            f"centers={len(self.bootstrap.centers)}, "
+            f"files={len(self.bootstrap.files)})"
+        )
+
+    @property
+    def vocab_size(self) -> int:
+        """Number of unique tokens in the field."""
+        return len(self.bootstrap.vocab)
+
+    @property
+    def centers(self) -> list:
+        """Current centers of gravity."""
+        return self.bootstrap.centers
