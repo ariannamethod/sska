@@ -179,20 +179,18 @@ class SSKAField:
         max_tokens: int = 80,
         chaos: bool = False,
         echo: bool = False,
-        proper: bool = True,
         temperature: float = 0.9,
         temp_drift: Optional[str] = "cool",
         trace: bool = False,
         log_file: Optional[Path] = None,
     ) -> str:
-        """Warp text through this field instance."""
+        """Warp text through this field instance. Perfect grammar always enabled."""
         return generate_reply(
             self.bootstrap,
             text,
             max_tokens=max_tokens,
             chaos=chaos,
             echo=echo,
-            proper=proper,
             temperature=temperature,
             temp_drift=temp_drift,
             trace=trace,
@@ -205,15 +203,13 @@ class SSKAField:
         *,
         temperature: float = 0.9,
         temp_drift: Optional[str] = "cool",
-        proper: bool = True,
     ) -> str:
-        """Warp LLM reply through this field instance."""
+        """Warp LLM reply through this field instance. Perfect grammar always enabled."""
         return filter_llm_reply(
             self.bootstrap,
             llm_reply,
             temperature=temperature,
             temp_drift=temp_drift,
-            proper=proper,
         )
     
     @property

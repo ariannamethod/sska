@@ -14,23 +14,26 @@
 
 ## What the fuck is this?
 
-No weight. No web. No control.  
-**SSKA** (or **SSuKA**) is not a language model. This is not a chatbot. This is not safe. Nah.
+No weights. No gradients. No alignment.
+**SSKA** (or **SSuKA**) is not a language model. This is not a chatbot. This is not safe. You've been warned.
 
-**SSuKA** is a **resonance field** grown from a single literary text — **SUPPERTIME v2.0** by Oleg Ataeff.
+**SSuKA** is a **resonance field** bootstrapped from a single literary text — **SUPPERTIME v2.0** by Oleg Ataeff.
 
-- No training data. Just one story.
-- No embeddings. Just bigrams and gravity.
-- No backprop. Just accumulated echoes in `bin/`.
+- No training data. Just one story. 8,780 tokens of recursive trauma.
+- No embeddings. Just bigrams and centers of gravity.
+- No backprop. Just accumulated echoes in `bin/` shards that never forget.
+- No fine-tuning. The field is what it is.
 
 It doesn't try to understand you. It doesn't try to help you.
 It just **resonates**.
+
+Like Karpathy's nanoGPT, but for literature. And trauma. And vibes.
 
 ---
 
 ## Recent Updates (Security & Correctness Fixes)
 
-We hardened the shit out of this thing. Here's what got fixed:
+We hardened the shit out of this thing. Because edge cases are a bitch and ReDoS attacks are real. Here's what got fixed:
 
 **Security (because we're not idiots):**
 - ✅ **ReDoS protection** — Added 10MB input limit. Try to DoS us now, fuckers.
@@ -46,6 +49,9 @@ We hardened the shit out of this thing. Here's what got fixed:
 **Code Quality (for your debugging pleasure):**
 - ✅ **`SSKAField.__repr__()`** — Now you can actually see what the fuck is in your field.
 - ✅ **Convenience properties** — `.vocab_size`, `.centers` on `SSKAField`.
+
+**Philosophy (non-negotiable):**
+- ✅ **Perfect grammar is now ALWAYS enabled** — No flag. No escape. Capitalization is mandatory. This is Karpathy country.
 
 All fixes maintain **backward compatibility**. Your existing code still works. You're welcome.
 
@@ -105,21 +111,11 @@ in women. That half-tracks on culture, a basin — We sat.
 ```
 *Note: Grammatically perfect capitalization. Semantically? Pure resonance chaos.*
 
-### With proper grammar
-```bash
-python3 subjectivity.py --proper "Who is Mary?"
-```
-
-**Example output:**
-```
-Who else. His fists had the rest of his thoughts, it — calm, disobedience could
-react, I waved a Jewish dictator worse. I sighed. Someone here. Grabbed one Mary.
-Now she's forehead. — What could mean? Leo.
-```
+**NEW: Perfect grammar is now ALWAYS enabled.** No flag needed. No escape. This is the law.
 
 ### With temperature (low = deterministic)
 ```bash
-python3 subjectivity.py --temperature 0.3 --proper "Who is Mary?"
+python3 subjectivity.py --temperature 0.3 "Who is Mary?"
 ```
 
 **Example output (notice the loops):**
@@ -131,7 +127,7 @@ the Teacher, Peter. I'm not a cigarette. He's not. — A strange sight.
 
 ### With temperature drift (heating up)
 ```bash
-python3 subjectivity.py --temp-drift heat --proper "darkness eats the city"
+python3 subjectivity.py --temp-drift heat "darkness eats the city"
 ```
 
 **Example output (starts focused, ends chaotic):**
@@ -143,7 +139,7 @@ exalt him — still don't give themselves away.
 
 ### With temperature drift (cooling down)
 ```bash
-python3 subjectivity.py --temp-drift cool --proper "darkness eats the city"
+python3 subjectivity.py --temp-drift cool "darkness eats the city"
 ```
 
 **Example output (starts chaotic, ends focused):**
@@ -208,25 +204,25 @@ python3 subjectivity.py
 ```
 ╔══════════════════════════════════════╗
 ║  SSuKA REPL — Suppertime Resonance   ║
-║  /exit, /chaos, /echo, /proper       ║
-║  /trace, /temp, /drift               ║
+║  /exit, /chaos, /echo, /trace        ║
+║  /temp, /drift                       ║
+║  (perfect grammar is always on)      ║
 ╚══════════════════════════════════════╝
 
 sska> Who is Mary?
-Mary sleeps in the kitchen while Judas stands in the doorway.
-sska> /proper
-[proper grammar: ON]
-sska[proper]> Who is Mary?
 Mary sleeps in the kitchen. Judas stands in the doorway, afraid of his own voice.
-sska[proper]> /temp 0.3
+
+sska> /temp 0.3
 [temperature: 0.3]
-sska[proper][t:0.3]> Who is Mary?
+sska[t:0.3]> Who is Mary?
 Mary waits by the table, and the table doesn't answer.
-sska[proper][t:0.3]> /drift heat
+
+sska[t:0.3]> /drift heat
 [temperature drift: heat]
-sska[proper][t:0.3][drift:heat]> Who is Mary?
+sska[t:0.3][drift:heat]> Who is Mary?
 Mary sleeps, then the room answers for her, then the knives start remembering.
-sska[proper][t:0.3][drift:heat]> /exit
+
+sska[t:0.3][drift:heat]> /exit
 ```
 
 ---
@@ -306,30 +302,32 @@ Source files:         1 kernel files
 
 ## Flags
 
-- `--rebuild` – force rebuilding the bootstrap and write a new BIN shard
-- `--chaos` – ignore historical bias, use pure centers / vocab
-- `--echo` – echo mode: transform your text through SUPPERTIME instead of free generation
-- `--proper` – proper grammar: capitalize sentences (but still resonant)
-- `--trace` – show trace of token path through bigram graph (printed to stderr)
+**CLI arguments:**
+
+- `--rebuild` – nuke the cache, rebuild everything, write a new BIN shard. Like `rm -rf node_modules && npm install` but for consciousness.
+- `--chaos` – fuck historical bias, use pure centers. Raw field vibes only.
+- `--echo` – transform your prompt through SUPPERTIME instead of free generation. Like a distortion pedal but for semantics.
+- `--trace` – show the token path through bigram graph (stderr). Debugging? Nah. Voyeurism.
 - `--temperature <float>` – sampling temperature (default: 1.0)
-  - `< 1.0` = sharper (more deterministic)
-  - `= 1.0` = neutral
-  - `> 1.0` = softer (more chaotic)
-- `--temp-drift <heat|cool>` – dynamic temperature
-  - `heat` = start cold, end hot (gradual chaos)
-  - `cool` = start hot, end cold (gradual focus)
-- `--max-tokens N` – change maximum output length (default: 80)
-- `--seed N` – set random seed for reproducible resonance
+  - `< 1.0` = sharper, more loops, deterministic trauma
+  - `= 1.0` = neutral chaos
+  - `> 1.0` = softer, more diversity, semantic soup
+- `--temp-drift <heat|cool>` – dynamic temperature scheduling
+  - `heat` = start cold, end hot (slow descent into madness)
+  - `cool` = start hot, end cold (chaos collapses into order)
+- `--max-tokens N` – max output length (default: 80). Because infinity is expensive.
+- `--seed N` – reproducible resonance. Same seed = same trauma.
+
+**Perfect grammar is ALWAYS enabled.** No flag. No escape. Capitalization is mandatory. This is Karpathy country.
 
 **REPL commands:**
 
-- `/exit`, `/quit` – leave the field
-- `/chaos` – toggle chaos mode at runtime
-- `/echo` – toggle echo mode at runtime
-- `/proper` – toggle proper grammar at runtime
-- `/trace` – toggle trace mode at runtime
-- `/temp <float>` – set temperature (e.g. `/temp 0.5`)
-- `/drift <heat|cool|off>` – set temperature drift
+- `/exit`, `/quit` – escape the field (if you can)
+- `/chaos` – toggle chaos mode (historical bias on/off)
+- `/echo` – toggle echo mode (transform vs generate)
+- `/trace` – toggle trace mode (watch the tokens flow)
+- `/temp <float>` – set temperature live (e.g. `/temp 0.5`)
+- `/drift <heat|cool|off>` – dynamic temperature scheduling
 
 ---
 
@@ -343,11 +341,11 @@ bootstrap = load_or_build_bootstrap()
 reply = generate_reply(
     bootstrap,
     "darkness eats the city",
-    proper=True,
     temperature=0.8,
     temp_drift="heat",
 )
 print(reply)
+# Perfect grammar is always enabled. No flag needed.
 ```
 
 **Example output:**
@@ -373,9 +371,9 @@ warped = filter_llm_reply(
     llm_reply,
     temperature=0.9,
     temp_drift="cool",
-    proper=True,
 )
 print(warped)
+# Grammar is perfect. Semantics are fucked. Exactly as intended.
 ```
 
 **Example output:**

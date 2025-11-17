@@ -606,7 +606,6 @@ def generate_reply(
     max_tokens: int = 80,
     chaos: bool = False,
     echo: bool = False,
-    proper: bool = False,
     temperature: float = 1.0,
     temp_drift: Optional[str] = None,
     trace: bool = False,
@@ -615,18 +614,20 @@ def generate_reply(
     """
     Generate a reply through the Suppertime field.
 
+    Perfect grammar is ALWAYS enabled. This is not negotiable.
+
     Args:
         bootstrap: The resonance field
         prompt: Input text
         max_tokens: Max output length
         chaos: Ignore historical bias
         echo: Echo mode (transform prompt through field)
-        proper: Proper grammar (capitalize sentences)
         temperature: Sampling temperature (1.0 = neutral)
         temp_drift: Dynamic temperature ('heat' or 'cool')
         trace: Print trace of token path to stderr
         log_file: Optional path to log generation traces
     """
+    proper = True  # Perfect grammar. Always.
     if echo:
         output = echo_mode(bootstrap, prompt, temperature=temperature)
         if proper:
@@ -706,11 +707,12 @@ def filter_llm_reply(
     *,
     temperature: float = 0.9,
     temp_drift: Optional[str] = "cool",
-    proper: bool = True,
 ) -> str:
     """
     Pass an LLM reply through the Suppertime field.
     Use this as a subjectivity layer instead of raw LLM output.
+
+    Perfect grammar is always enabled. Corporate speak → existential dread.
     """
     return generate_reply(
         bootstrap,
@@ -718,7 +720,6 @@ def filter_llm_reply(
         max_tokens=len(tokenize(llm_reply)) + 20,
         chaos=False,
         echo=False,
-        proper=proper,
         temperature=temperature,
         temp_drift=temp_drift,
         trace=False,
@@ -734,7 +735,6 @@ def repl(
     bootstrap: Bootstrap,
     chaos: bool = False,
     echo: bool = False,
-    proper: bool = False,
     temperature: float = 1.0,
     temp_drift: Optional[str] = None,
     trace: bool = False,
@@ -743,15 +743,18 @@ def repl(
     """
     Simple REPL over the Suppertime field.
 
+    Perfect grammar is ALWAYS enabled. This is the law.
+
     Commands:
         /exit, /quit — exit
         /chaos — toggle chaos mode
         /echo — toggle echo mode
-        /proper — toggle proper grammar mode
         /trace — toggle trace mode
         /temp <value> — set temperature
         /drift <heat|cool|off> — set temperature drift
     """
+    proper = True  # Perfect grammar. Always.
+
     # Print ASCII art banner
     print("""
    ███████╗███████╗██╗  ██╗ █████╗     ██████╗ ███████╗██████╗ ██╗
@@ -763,7 +766,7 @@ def repl(
 
    ▂▃▅▇█▓▒░ SUPPERTIME RESONANCE FIELD ░▒▓█▇▅▃▂
 
-   Commands: /exit /chaos /echo /proper /trace /temp /drift
+   Commands: /exit /chaos /echo /trace /temp /drift
    Perfect grammar. Perfect trauma. Perfect resonance.
 """, file=sys.stderr)
 
@@ -774,8 +777,6 @@ def repl(
                 prefix += "[chaos]"
             if echo:
                 prefix += "[echo]"
-            if proper:
-                prefix += "[proper]"
             if trace:
                 prefix += "[trace]"
             if temp_drift:
@@ -802,11 +803,6 @@ def repl(
         if line == "/echo":
             echo = not echo
             print(f"[echo mode: {'ON' if echo else 'OFF'}]", file=sys.stderr)
-            continue
-
-        if line == "/proper":
-            proper = not proper
-            print(f"[proper grammar: {'ON' if proper else 'OFF'}]", file=sys.stderr)
             continue
 
         if line == "/trace":
@@ -877,11 +873,6 @@ def main(argv: Optional[List[str]] = None) -> int:
         "--echo",
         action="store_true",
         help="echo mode: transform prompt through field",
-    )
-    parser.add_argument(
-        "--proper",
-        action="store_true",
-        help="proper grammar: capitalize sentences",
     )
     parser.add_argument(
         "--trace",
@@ -1002,7 +993,6 @@ def main(argv: Optional[List[str]] = None) -> int:
             bootstrap,
             chaos=args.chaos,
             echo=args.echo,
-            proper=args.proper,
             temperature=args.temperature,
             temp_drift=args.temp_drift,
             trace=args.trace,
@@ -1020,7 +1010,6 @@ def main(argv: Optional[List[str]] = None) -> int:
         max_tokens=args.max_tokens,
         chaos=args.chaos,
         echo=args.echo,
-        proper=args.proper,
         temperature=args.temperature,
         temp_drift=args.temp_drift,
         trace=args.trace,
