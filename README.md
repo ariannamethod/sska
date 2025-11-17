@@ -19,7 +19,7 @@ No weights. No gradients. No alignment.
 **SSKA** is a post-symbolic AI prototype — a system that evolves without weights, training, datasets or backprop.
 A subjectivity layer grown entirely from one text.
 
-**SSuKA** is a **resonance field** bootstrapped from a single literary text — **SUPPERTIME v2.0** by Oleg Ataeff.
+**SSKA** is a **resonance field** bootstrapped from a single literary text — **SUPPERTIME v2.0** by Oleg Ataeff.
 
 - No training data. Just one story. 8,780 tokens of recursive trauma.
 - No embeddings. Just bigrams and centers of gravity.
