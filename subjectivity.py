@@ -836,7 +836,6 @@ def repl(
             line,
             chaos=chaos,
             echo=echo,
-            proper=proper,
             temperature=temperature,
             temp_drift=temp_drift,
             trace=trace,
