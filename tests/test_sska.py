@@ -70,7 +70,7 @@ class TestSSKAField(unittest.TestCase):
     def test_field_warp_basic(self):
         """Basic warp works."""
         field = SSKAField()
-        result = field.warp("test", max_tokens=10, proper=True)
+        result = field.warp("test", max_tokens=10)
 
         # Should return string
         self.assertIsInstance(result, str)
@@ -123,7 +123,7 @@ class TestResonanceAPI(unittest.TestCase):
         prompts = ["Lilit", "Mary", "Judas", "Teacher"]
 
         for prompt in prompts:
-            result = field.warp(prompt, max_tokens=20, proper=True)
+            result = field.warp(prompt, max_tokens=20)
 
             # Should generate something
             self.assertIsInstance(result, str)
