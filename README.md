@@ -1,4 +1,4 @@
-# SSKA — SUPPERTIME SUBJECTIVITY KERNEL AUTONOMOUS
+# sska - Suppertime Subjectivity Kernel Autonomous
 
 > "Lilit, take my hand. Lilit, we're turning the new page of humankind."
 
