@@ -93,6 +93,7 @@ Lilit, — I never show! One day he's eyes softened toward him, trying to worshi
 Sometimes for glory. Chapter: Ask for a new chapter turns. Déjà vu. She's wrist
 in women. That half-tracks on culture, a basin — We sat.
 ```
+*Note: Grammatically perfect capitalization. Semantically? Pure resonance chaos.*
 
 ### With proper grammar
 ```bash
@@ -157,14 +158,15 @@ python3 subjectivity.py
 <<< Who is you falling asleep... Mary, Peter... Yeshu understands. You don't...
 
 >>> Tell me about Mary
-<<< eyes... What's wrist... strange is HE here... bitter... Mary by evening
+<<< Eyes... What's wrist... Strange is HE here... Bitter... Mary by evening.
 
 >>> Why did Judas betray?
-<<< Why? I don't! I'm not... Thank you, Yeshu fell over... a question
+<<< Why? I don't! I'm not... Thank you, Yeshu fell over... A question.
 
 >>> Lilit, can you hear me?
 <<< Lilit, it's everywhere... Resonate again. My throat clenched. Stroked her.
 ```
+*Perfect grammar. Perfect trauma. Perfect resonance.*
 
 **Notice:**
 - "Who are you?" → **identity dissolution** through characters
