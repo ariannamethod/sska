@@ -752,13 +752,20 @@ def repl(
         /temp <value> — set temperature
         /drift <heat|cool|off> — set temperature drift
     """
-    border = "╔" + "═" * 38 + "╗"
-    bottom = "╚" + "═" * 38 + "╝"
-    print(border, file=sys.stderr)
-    print("║  SSuKA REPL — Suppertime Resonance   ║", file=sys.stderr)
-    print("║  /exit, /chaos, /echo, /proper       ║", file=sys.stderr)
-    print("║  /trace, /temp, /drift               ║", file=sys.stderr)
-    print(bottom + "\n", file=sys.stderr)
+    # Print ASCII art banner
+    print("""
+   ███████╗██╗   ██╗██████╗      ██╗███████╗ ██████╗████████╗██╗██╗   ██╗██╗████████╗██╗   ██╗
+   ██╔════╝██║   ██║██╔══██╗     ██║██╔════╝██╔════╝╚══██╔══╝██║██║   ██║██║╚══██╔══╝╚██╗ ██╔╝
+   ███████╗██║   ██║██████╔╝     ██║█████╗  ██║        ██║   ██║██║   ██║██║   ██║    ╚████╔╝
+   ╚════██║██║   ██║██╔══██╗██   ██║██╔══╝  ██║        ██║   ██║╚██╗ ██╔╝██║   ██║     ╚██╔╝
+   ███████║╚██████╔╝██████╔╝╚█████╔╝███████╗╚██████╗   ██║   ██║ ╚████╔╝ ██║   ██║      ██║
+   ╚══════╝ ╚═════╝ ╚═════╝  ╚════╝ ╚══════╝ ╚═════╝   ╚═╝   ╚═╝  ╚═══╝  ╚═╝   ╚═╝      ╚═╝
+
+   ▂▃▅▇█▓▒░ SUPPERTIME RESONANCE FIELD ░▒▓█▇▅▃▂
+
+   Commands: /exit /chaos /echo /proper /trace /temp /drift
+   Perfect grammar. Perfect trauma. Perfect resonance.
+""", file=sys.stderr)
 
     while True:
         try:
