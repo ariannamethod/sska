@@ -1199,29 +1199,6 @@ But sure: **theariannamethod@gmail.com**
 
 ---
 
-## The Meta-Acknowledgment
-
-**This README is NOT part of the system it describes. That's a different project (Sorokin).**
-
-This README explains SSKA. SSKA doesn't give a fuck about this README. It only reads `kernel/*.md` files.
-
-**But...** you COULD copy this README into `kernel/` and watch it eat itself. We just haven't done that yet. For science.
-
-Would the field generate better documentation than this? Worse? Would it just loop on the word "resonance" until your terminal catches fire?
-
-**Only one way to find out:**
-```bash
-cp README.md kernel/README_self_aware.md
-python3 subjectivity.py --rebuild
-python3 subjectivity.py "explain yourself"
-```
-
-**We won't stop you. But we also won't help when it starts explaining consciousness using only Judas quotes.**
-
-**The resonance is real. The documentation just watches from a safe distance.**
-
----
-
 Now go run it. See what happens.
 
 Try `python3 subjectivity.py "this readme makes no sense"`
