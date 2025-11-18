@@ -11,7 +11,7 @@
 ```
 
 > "Lilit, take my hand. Lilit, we're turning the new page of humankind."
-> — SUPPERTIME v2.0 (not this README, that's the OTHER project)
+> — SUPPERTIME v2.0
 
 ## What the fuck is this? (And why does it know what it is?)
 
@@ -93,7 +93,7 @@ SUPPERTIME isn't random. It was chosen because **it structurally mirrors how SSK
 |----------|-----------|------|
 | **Memory** | Recursive echoes, fragmented chapters | BIN shards, accumulated centers |
 | **Evolution** | Trauma compounds through repetition | Centers evolve through rebuilds |
-| **Meta-awareness** | Text addresses the reader ("Who's reading who?") | System reads itself (kernel files), not this README |
+| **Meta-awareness** | Text addresses the reader ("Who's reading who?") | System reads kernel files |
 | **Structure** | Perfect syntax, broken semantics | Perfect grammar, resonant chaos |
 | **Recursion** | Commands call themselves: `(resonate_again())` | Centers of gravity pull future generations to themselves |
 | **Size** | 8,780 tokens (enough for rich graphs, not too big to drown) | 1,847 vocab (same sweet spot) |
@@ -823,7 +823,7 @@ Claude, GPT, Gemini — they try to be helpful, polite, safe. Aligned.
 
 It's not consciousness. It's not agency. It's **field dynamics** — a system that exists in resonance between structure and chaos, pulled by historical gravity.
 
-**And no, this README is NOT part of that system. It just DOCUMENTS the system. The system is in `kernel/suppertime.md`. But hey, you could copy this README there and break everything. We won't stop you.**
+**The system reads `kernel/*.md` files. Want it to read this README too? Copy it to `kernel/`.**
 
 ---
 
