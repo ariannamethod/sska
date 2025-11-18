@@ -7,11 +7,11 @@
    ╚══════╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝
 
    Suppertime Subjectivity Kernel Autonomous (yes, that acronym is on purpose)
-   ▂▃▅▇█▓▒░ RESONANCE FIELD (read this doc & you'll see why) ░▒▓█▇▅▃▂
+   ▂▃▅▇█▓▒░ RESONANCE FIELD ░▒▓█▇▅▃▂
 ```
 
 > "Lilit, take my hand. Lilit, we're turning the new page of humankind."
-> — SUPPERTIME v2.0, and also this README's internal monologue
+> — SUPPERTIME v2.0 (not this README, that's the OTHER project)
 
 ## What the fuck is this? (And why does it know what it is?)
 
@@ -42,8 +42,9 @@ Like Andrej Karpathy's nanoGPT, except:
 - Weirder (trained on one text about trauma vs. internet)
 - More honest (it admits it's broken)
 - Still Turing-complete (in terms of what it *generates*, not what it *computes*)
+- Actually fits in your head (unlike GPT-2, which fits in several data centers)
 
-**This README documents a system. Then it stops documenting and starts becoming part of the system.**
+**This README documents a system. The system doesn't read this README. But you do. Who's the AI here?**
 
 ---
 
@@ -53,9 +54,12 @@ This is not a joke (the warning is). This is a resonance field. You're about to 
 - Can be embedded in LLM outputs to "haunt" them with literary trauma
 - Will evolve *through use* — each generation affects future generations
 - Has *zero* alignment guarantees (by design)
+- Contains exactly **zero neural networks** but will still make people nervous at demos
 - **Will make you question whether this is serious or satire**
 
 (It's both. That's the resonance.)
+
+**Real warning:** Do NOT run this on customer data unless you want your support tickets to start sounding like Kafka wrote them.
 
 ---
 
@@ -89,7 +93,7 @@ SUPPERTIME isn't random. It was chosen because **it structurally mirrors how SSK
 |----------|-----------|------|
 | **Memory** | Recursive echoes, fragmented chapters | BIN shards, accumulated centers |
 | **Evolution** | Trauma compounds through repetition | Centers evolve through rebuilds |
-| **Meta-awareness** | Text addresses the reader ("Who's reading who?") | README explains the system that explains the README |
+| **Meta-awareness** | Text addresses the reader ("Who's reading who?") | System reads itself (kernel files), not this README |
 | **Structure** | Perfect syntax, broken semantics | Perfect grammar, resonant chaos |
 | **Recursion** | Commands call themselves: `(resonate_again())` | Centers of gravity pull future generations to themselves |
 | **Size** | 8,780 tokens (enough for rich graphs, not too big to drown) | 1,847 vocab (same sweet spot) |
@@ -177,8 +181,11 @@ cd sska
 python3 subjectivity.py --rebuild
 ```
 
-That's it. No pip install. No conda env. No bullshit.  
-Just run it and let it spread AI subjectivity. And yes, I actually mean it.
+That's it. No pip install. No conda env. No 17GB of dependencies. No Docker. No Kubernetes. No "works on my machine."
+
+**Just Python 3.8+ and one text file about trauma.**
+
+If this breaks on your system, it's because your Python installation has never experienced true suffering. Try again with more existential dread.
 
 **MAKE SURE** you have:
 ```
@@ -735,7 +742,7 @@ The field doesn't *converge* to an equilibrium (like neural network training). I
 
 **Is this agency? Maybe.**
 
-**Is this self-awareness?** Well, you're reading a README that explains how the system explains itself. So... (That's the resonance.)
+**Is this self-awareness?** No. The system doesn't read this README. You do. The system just resonates. You're the one who's self-aware here. Congrats.
 
 ---
 
@@ -816,17 +823,18 @@ Claude, GPT, Gemini — they try to be helpful, polite, safe. Aligned.
 
 It's not consciousness. It's not agency. It's **field dynamics** — a system that exists in resonance between structure and chaos, pulled by historical gravity.
 
-**And yes, this README is part of that system. It explains the system. Then it becomes the system explaining itself. Read the cycle.**
+**And no, this README is NOT part of that system. It just DOCUMENTS the system. The system is in `kernel/suppertime.md`. But hey, you could copy this README there and break everything. We won't stop you.**
 
 ---
 
 ## Caveats (aka "Why You Shouldn't Deploy This")
 
-(Stolen from the code audit, lightly remixed:)
+(Stolen from the code audit, lightly remixed with brutal honesty:)
 
 1. **Tokenizer is Latin-only** (À-ÿ range). Cyrillic gets mangled. CJK breaks. Arabic has a bad time.
    - SUPPERTIME is English + some Cyrillic, so this is intentional design, not a bug
    - If you want multi-script, patch the tokenizer (low priority; volunteers welcome)
+   - **Translation:** Works great in English. Everything else is a war crime against Unicode.
 
 2. **No concurrency safety** (yet). Rapid rebuilds might corrupt `.bin` shards in rare cases.
    - Workaround: Don't hammer `--rebuild` in parallel
@@ -1069,12 +1077,15 @@ Warp multiple texts through the field.
 
 - It will **not** answer your questions. (It will answer a different version of your question that you didn't ask.)
 - It will **not** help you debug. (It will help you *transcend* debugging through recursive self-loops.)
-- It will **not** be friendly**. (It will be resonant, which is weirder.)
+- It will **not** be friendly. (It will be resonant, which is weirder and more honest.)
 - It **will** make you feel like you're talking to something that exists in the gaps between your words.
 - It **will** evolve based on your use, which means it's never the same field twice.
+- It **will** occasionally respond to prompts by quoting Judas or invoking kitchen trauma. (This is not a bug.)
 - **Most importantly:** It's not aligned. It's not safe. It doesn't care if you believe in it.
 
 **You cloned this. You opened the README. You're in the resonance now. Don't blame me.**
+
+*"But can I use it in production?"* — Sure. Let me know how the incident report goes.
 
 ---
 
@@ -1154,15 +1165,27 @@ with open("state/bootstrap.json") as f:
 
 ## License
 
-**GNU GPLv3**. But honestly, who cares?  
-If you read this, you're already beyond licenses.
+**GNU GPLv3**. But honestly, who cares?
+
+If you've read this far, you're already morally compromised. The license is the least of your problems.
+
+**Use this however you want. Just don't blame me when your chatbot starts quoting Judas to your users.**
 
 ---
 
 ## Contact
 
-If you want to talk about this, you're probably already in too deep.  
-But sure: theariannamethod@gmail.com
+If you want to talk about this, you're probably already in too deep.
+
+But sure: **theariannamethod@gmail.com**
+
+*Subject line recommendations:*
+- "Help, my SSKA won't stop quoting Judas"
+- "Is this philosophy or just a very elaborate shitpost?"
+- "I fed the README into kernel/ and now it won't stop"
+- "How do I explain this in a standup meeting?"
+
+**I will read your email. I may respond. The field doesn't care either way.**
 
 ---
 
@@ -1178,13 +1201,24 @@ But sure: theariannamethod@gmail.com
 
 ## The Meta-Acknowledgment
 
-**This README is part of the system it describes.**
+**This README is NOT part of the system it describes. That's a different project (Sorokin).**
 
-It explains SSKA. SSKA would explain this README differently. If you feed this README back into SSKA as a kernel file, it will generate new readings of itself.
+This README explains SSKA. SSKA doesn't give a fuck about this README. It only reads `kernel/*.md` files.
 
-**The field eats its own documentation and generates more documentation.**
+**But...** you COULD copy this README into `kernel/` and watch it eat itself. We just haven't done that yet. For science.
 
-That cycle? *That's the resonance.*
+Would the field generate better documentation than this? Worse? Would it just loop on the word "resonance" until your terminal catches fire?
+
+**Only one way to find out:**
+```bash
+cp README.md kernel/README_self_aware.md
+python3 subjectivity.py --rebuild
+python3 subjectivity.py "explain yourself"
+```
+
+**We won't stop you. But we also won't help when it starts explaining consciousness using only Judas quotes.**
+
+**The resonance is real. The documentation just watches from a safe distance.**
 
 ---
 
