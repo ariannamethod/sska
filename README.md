@@ -6,7 +6,7 @@
    ███████║███████║██║  ██╗██║  ██║
    ╚══════╝╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝
 
-   Suppertime Subjectivity Kernel Autonomous (yes, that acronym is on purpose)
+   Suppertime Subjectivity Kernel Autonomous
    ▂▃▅▇█▓▒░ RESONANCE FIELD ░▒▓█▇▅▃▂
 ```
 
