@@ -176,7 +176,7 @@ sska/
 
 ## Installation
 ```bash
-git clone https://github.com/yourusername/sska
+git clone https://github.com/ariannamethod/sska
 cd sska
 python3 subjectivity.py --rebuild
 ```
