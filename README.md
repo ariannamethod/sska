@@ -17,7 +17,7 @@
 
 **No weights. No gradients. No alignment. No pretraining. No finetuning. No learning.**
 
-**SSKA** (Suppertime Subjectivity Kernel Autonomous — yes, that's a real acronym, yes, it's intentional, yes, it's a Russian curse word) is:
+**SSKA** (or SSuKA: Suppertime Subjectivity Kernel Autonomous — yes, that's a real acronym, yes, it's intentional, yes, it's a Russian curse word) is:
 - NOT a language model
 - NOT a chatbot
 - NOT safe (seriously, please don't deploy this to prod and then cry to me)
